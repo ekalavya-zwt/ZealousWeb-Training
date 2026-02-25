@@ -11,11 +11,20 @@ const {
   selectByfirstNameRule,
   selectRecentHiredEmployee,
   updateEmployeeSal,
+  updateEmployeeSalByDept,
+  deleteEmployee,
+  restoreEmployee,
+  permanentDeleteEmployee,
+  selectEmployeesWithComplexWhereConditions,
+  selectEmployeesWithAnalyticsQueries,
 } = require("../services/employeeService");
 
 async function getEmployees(req, res) {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 4;
+
   try {
-    const employees = await getAllEmployees();
+    const employees = await getAllEmployees(page, limit);
     res.status(200).json(employees);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -126,6 +135,60 @@ async function getUpdatedEmployees(req, res) {
   }
 }
 
+async function getUpdatedEmployeesByDept(req, res) {
+  try {
+    const employees = await updateEmployeeSalByDept();
+    res.status(200).json(employees);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+async function getDeletedEmployees(req, res) {
+  try {
+    const employees = await deleteEmployee();
+    res.status(200).json(employees);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+async function getRestoredEmployees(req, res) {
+  try {
+    const employees = await restoreEmployee();
+    res.status(200).json(employees);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+async function getPermanentlyDeletedEmployees(req, res) {
+  try {
+    const employees = await permanentDeleteEmployee();
+    res.status(200).json(employees);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+async function getEmployeesWithComplexWhereConditions(req, res) {
+  try {
+    const employees = await selectEmployeesWithComplexWhereConditions();
+    res.status(200).json(employees);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+async function getEmployeesWithAnalyticsQueries(req, res) {
+  try {
+    const employees = await selectEmployeesWithAnalyticsQueries();
+    res.status(200).json(employees);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
 module.exports = {
   getEmployees,
   getEmployee,
@@ -139,4 +202,10 @@ module.exports = {
   getEmployeesStartWithJ,
   getRecentHiredEmployees,
   getUpdatedEmployees,
+  getUpdatedEmployeesByDept,
+  getDeletedEmployees,
+  getRestoredEmployees,
+  getPermanentlyDeletedEmployees,
+  getEmployeesWithComplexWhereConditions,
+  getEmployeesWithAnalyticsQueries,
 };

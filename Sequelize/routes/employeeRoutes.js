@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const controller = require("../controllers/employeeController");
 
-// router.get("/", controller.getEmployees);
+router.get("/", controller.getEmployees);
 // router.get("/:id", controller.getEmployee);
 // router.get("/", controller.getEmployeesFirstNameAndEmail);
 // router.get("/", controller.getEmployeesWithSalaryRule);
@@ -11,6 +11,11 @@ const controller = require("../controllers/employeeController");
 // router.get("/", controller.getOrderedSalEmployee);
 // router.get("/", controller.getEmployeesStartWithJ);
 // router.get("/", controller.getRecentHiredEmployees);
-router.get("/", controller.getUpdatedEmployees);
+// router.get("/", controller.getUpdatedEmployees);
+// router.get("/", controller.getUpdatedEmployeesByDept);
+// router.get("/", controller.getDeletedEmployees);
+// router.get("/", controller.getPermanentlyDeletedEmployees);
+// router.get("/", controller.getEmployeesWithComplexWhereConditions);
+// router.get("/", controller.getEmployeesWithAnalyticsQueries);
 
 module.exports = router;
