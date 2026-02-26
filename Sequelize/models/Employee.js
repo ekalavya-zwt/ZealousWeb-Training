@@ -69,10 +69,18 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "RESTRICT",
         onUpdate: "CASCADE",
       },
-      status: {
-        type: DataTypes.ENUM("ONPROJECT", "TERMINATED", "ACTIVE", "ONBOARDED"),
-        allowNull: false,
-        defaultValue: "ACTIVE",
+      // status: {
+      //   type: DataTypes.ENUM("ONPROJECT", "TERMINATED", "ACTIVE", "ONBOARDED"),
+      //   allowNull: false,
+      //   defaultValue: "ACTIVE",
+      // },
+      managerId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        validate: {
+          isInt: true,
+          min: 1,
+        },
       },
     },
     {
@@ -82,6 +90,36 @@ module.exports = (sequelize, DataTypes) => {
       paranoid: true,
     },
   );
+
+  Employee.associate = (models) => {
+    Employee.belongsTo(models.Department, {
+      foreignKey: "deptId",
+      as: "department",
+      onDelete: "RESTRICT",
+      onUpdate: "CASCADE",
+    });
+
+    Employee.belongsToMany(models.Project, {
+      through: models.EmployeeProject,
+      foreignKey: "empId",
+      otherKey: "projectId",
+      as: "projects",
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
+    });
+
+    Employee.belongsTo(models.Employee, {
+      foreignKey: "managerId",
+      as: "manager",
+      onDelete: "SET NULL",
+      onUpdate: "CASCADE",
+    });
+
+    Employee.hasMany(models.Employee, {
+      foreignKey: "managerId",
+      as: "subordinates",
+    });
+  };
 
   return Employee;
 };

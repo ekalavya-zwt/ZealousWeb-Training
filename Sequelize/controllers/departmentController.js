@@ -1,6 +1,7 @@
 const {
   updateDeptLocation,
   getAllDepartments,
+  eagerLoadingQueries,
 } = require("../services/departmentService");
 
 async function getDepartments(req, res) {
@@ -21,7 +22,17 @@ async function getUpdatedDeptLocation(req, res) {
   }
 }
 
+async function practicingEagerLoadingQueries(req, res) {
+  try {
+    const employees = await eagerLoadingQueries();
+    res.status(200).json(employees);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
 module.exports = {
   getDepartments,
   getUpdatedDeptLocation,
+  practicingEagerLoadingQueries,
 };

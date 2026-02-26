@@ -17,6 +17,7 @@ const {
   permanentDeleteEmployee,
   selectEmployeesWithComplexWhereConditions,
   selectEmployeesWithAnalyticsQueries,
+  eagerLoadingQueries,
 } = require("../services/employeeService");
 
 async function getEmployees(req, res) {
@@ -189,6 +190,15 @@ async function getEmployeesWithAnalyticsQueries(req, res) {
   }
 }
 
+async function practicingEagerLoadingQueries(req, res) {
+  try {
+    const employees = await eagerLoadingQueries();
+    res.status(200).json(employees);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
 module.exports = {
   getEmployees,
   getEmployee,
@@ -208,4 +218,5 @@ module.exports = {
   getPermanentlyDeletedEmployees,
   getEmployeesWithComplexWhereConditions,
   getEmployeesWithAnalyticsQueries,
+  practicingEagerLoadingQueries,
 };

@@ -3,6 +3,7 @@ const { sequelize } = require("./models");
 const employeeRoutes = require("./routes/employeeRoutes");
 const departmentRoutes = require("./routes/departmentRoutes");
 const employeeProjectRoutes = require("./routes/employeeProjectRoutes");
+const projectRoutes = require("./routes/projectRoutes");
 
 const app = express();
 const PORT = 3000;
@@ -15,6 +16,7 @@ app.use(express.json());
 // Routes
 app.use("/employees", employeeRoutes);
 app.use("/departments", departmentRoutes);
+app.use("/projects", projectRoutes);
 app.use("/employeeProjects", employeeProjectRoutes);
 
 // Test route

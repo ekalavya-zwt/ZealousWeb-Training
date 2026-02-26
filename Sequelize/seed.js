@@ -1,6 +1,9 @@
 const { sequelize } = require("./models");
 const { createDepartments } = require("./services/departmentService");
-const { createEmployees } = require("./services/employeeService");
+const {
+  createEmployees,
+  assignManager,
+} = require("./services/employeeService");
 const { createEmployee } = require("./services/employeeService");
 const { createProjects } = require("./services/projectService");
 const { assignEmployeeProjects } = require("./services/employeeProjectService");
@@ -23,8 +26,10 @@ async function runSeeder() {
       hireDate: "2023-02-15",
       salary: 80000,
       deptId: 1,
-      status: "ACTIVE",
+      // status: "ACTIVE",
+      managerId: 1,
     });
+    await assignManager();
     await createProjects(projectsData);
     await assignEmployeeProjects(employeeProjectsData);
 

@@ -1,8 +1,25 @@
-const { Employee, sequelize } = require("../models");
+const { Employee, Department, Project, sequelize } = require("../models");
 const { Op, fn, col, Sequelize } = require("sequelize");
 
 async function createEmployees(employees) {
   await Employee.bulkCreate(employees, { validate: true });
+}
+
+async function assignManager() {
+  const managerMapping = [
+    { employeeId: 1, managerId: 2 },
+    { employeeId: 3, managerId: 6 },
+    { employeeId: 5, managerId: 4 },
+    { employeeId: 7, managerId: 4 },
+    { employeeId: 9, managerId: 2 },
+  ];
+
+  for (const item of managerMapping) {
+    await Employee.update(
+      { managerId: item.managerId },
+      { where: { id: item.employeeId } },
+    );
+  }
 }
 
 async function createEmployee(employee) {
@@ -201,9 +218,84 @@ async function selectEmployeesWithAnalyticsQueries() {
   return rows;
 }
 
+// async function eagerLoadingQueries() {
+//   return await Employee.findAll({
+//     include: {
+//       model: Department,
+//       as: "department",
+//       attributes: ["deptName"],
+//     },
+//   });
+// }
+
+// async function eagerLoadingQueries() {
+//   return await Employee.findAll({
+//     include: {
+//       model: Project,
+//       as: "projects",
+//       attributes: ["projectName"],
+//       through: {
+//         attributes: ["role"],
+//       },
+//     },
+//   });
+// }
+
+// async function eagerLoadingQueries() {
+//   return await Employee.findAll({
+//     include: {
+//       model: Department,
+//       as: "department",
+//       attributes: ["deptName"],
+//       where: { deptId: { [Op.eq]: 1 } },
+//     },
+//     where: { salary: { [Op.gt]: 70000 } },
+//   });
+// }
+
+// async function eagerLoadingQueries() {
+//   return await Employee.findAll({
+//     attributes: ["id", "firstName", "lastName", "email"],
+//     include: {
+//       model: Employee,
+//       as: "manager",
+//       attributes: ["firstName", "lastName"],
+//     },
+//   });
+// }
+
+// async function eagerLoadingQueries() {
+//   return await Employee.findAll({
+//     attributes: ["id", "firstName", "lastName", "email", "salary"],
+//     include: {
+//       model: Employee,
+//       as: "manager",
+//       attributes: ["firstName", "lastName", "salary"],
+//     },
+//     where: { salary: { [Op.gt]: col("manager.salary") } },
+//   });
+// }
+
+async function eagerLoadingQueries() {
+  return await Employee.findAll({
+    include: {
+      model: Department,
+      as: "department",
+      attributes: ["deptName"],
+    },
+    include: {
+      model: Project,
+      as: "projects",
+      attributes: ["projectName"],
+      through: { attributes: ["role", "hoursWorked"] },
+    },
+  });
+}
+
 module.exports = {
   createEmployees,
   createEmployee,
+  assignManager,
   getAllEmployees,
   getEmployeeByID,
   selectByNameAndEmail,
@@ -222,4 +314,5 @@ module.exports = {
   permanentDeleteEmployee,
   selectEmployeesWithComplexWhereConditions,
   selectEmployeesWithAnalyticsQueries,
+  eagerLoadingQueries,
 };

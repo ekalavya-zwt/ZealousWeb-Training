@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.VIRTUAL,
         get() {
           const diff = new Date(this.endDate) - new Date(this.startDate);
-          return Math.ceil(diff / (1000 * 60 * 60 * 24));
+          return `${Math.ceil(diff / (1000 * 60 * 60 * 24))} days`;
         },
       },
       budget: {
@@ -54,13 +54,21 @@ module.exports = (sequelize, DataTypes) => {
       deptId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+          model: "departments",
+          key: "dept_id",
+        },
         validate: {
           isInt: true,
           min: 1,
         },
+        onDelete: "RESTRICT",
+        onUpdate: "CASCADE",
       },
       isCompleted: {
         type: DataTypes.VIRTUAL(DataTypes.BOOLEAN),
+        allowNull: false,
+        defaultValue: "false",
       },
     },
     {
@@ -70,6 +78,24 @@ module.exports = (sequelize, DataTypes) => {
       paranoid: true,
     },
   );
+
+  Project.associate = (models) => {
+    Project.belongsTo(models.Department, {
+      foreignKey: "deptId",
+      as: "department",
+      onDelete: "RESTRICT",
+      onUpdate: "CASCADE",
+    });
+
+    Project.belongsToMany(models.Employee, {
+      through: models.EmployeeProject,
+      foreignKey: "projectId",
+      otherKey: "empId",
+      as: "employees",
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
+    });
+  };
 
   return Project;
 };
