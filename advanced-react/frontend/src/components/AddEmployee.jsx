@@ -3,7 +3,7 @@ import "../styles/Employees.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function EmployeeList() {
+function AddEmployee() {
   const { error, createEmployee } = useEmployees();
 
   const emptyForm = {
@@ -76,9 +76,12 @@ function EmployeeList() {
       newErrors.state = "Status cannot remain empty";
     }
 
-    setFormError(newErrors);
+    if (Object.keys(newErrors).length > 0) {
+      setFormError(newErrors);
+      return false;
+    }
 
-    return Object.keys(newErrors).length === 0;
+    return true;
   };
 
   return (
@@ -137,6 +140,7 @@ function EmployeeList() {
           <input
             type="number"
             name="salary"
+            min="0"
             value={inputs.salary}
             onChange={handleInputs}
           />
@@ -147,6 +151,7 @@ function EmployeeList() {
           <input
             type="number"
             name="dept_id"
+            min="1"
             value={inputs.dept_id}
             onChange={handleInputs}
           />
@@ -168,4 +173,4 @@ function EmployeeList() {
   );
 }
 
-export default EmployeeList;
+export default AddEmployee;
