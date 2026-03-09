@@ -1,4 +1,5 @@
 import "./App.css";
+import Todo from "./components/Todo";
 import { Routes, Route } from "react-router-dom";
 import InputFocus from "./components/InputFocus";
 // import Counter from "./components/Counter";
@@ -26,6 +27,7 @@ function App() {
 
   return (
     <>
+      {/* <Todo /> */}
       {/* <InputFocus /> */}
       {/* <Counter /> */}
       {/* <Timer /> */}
