@@ -4,13 +4,13 @@ import withDarkMode from "../utils/withDarkMode";
 import useAuth from "../hooks/useAuth";
 
 const Dashboard = () => {
-  const { logout } = useAuth();
+  // const { logout } = useAuth();
   return (
-    <div className="dashboard">
+    <div className="dashboard" style={{ padding: "20px" }}>
       <h2>Welcome to the Employee Dashboard</h2>
-      <button type="button" onClick={logout}>
+      {/* <button type="button" onClick={logout}>
         Logout
-      </button>
+      </button> */}
     </div>
   );
 };

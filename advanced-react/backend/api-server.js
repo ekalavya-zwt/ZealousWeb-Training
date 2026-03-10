@@ -71,6 +71,16 @@ app.get("/api/employees", async (req, res) => {
   }
 });
 
+app.get("/api/dummy_employees", async (req, res) => {
+  try {
+    const [rows] = await con.query("SELECT * FROM dummy_employees");
+    res.status(200).json(rows);
+  } catch (error) {
+    console.error(`GET /api/dummy_employees error:`, error);
+    res.status(500).json({ message: "Failed to retrieve dummy employees" });
+  }
+});
+
 app.post("/api/employees", async (req, res) => {
   const { first_name, last_name, email, hire_date, salary, dept_id, state } =
     req.body;

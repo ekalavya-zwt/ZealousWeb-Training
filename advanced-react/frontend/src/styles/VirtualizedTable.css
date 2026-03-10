@@ -1,0 +1,24 @@
+.table-container {
+  width: 100%;
+}
+
+.table-header,
+.table-row {
+  display: grid;
+  grid-template-columns: 80px 200px 300px 180px 120px 120px;
+  align-items: center;
+  padding: 8px;
+  text-align: center;
+}
+
+.table-header {
+  font-weight: bold;
+  border-bottom: 2px solid #ccc;
+  position: sticky;
+  top: 0;
+  background: white;
+}
+
+.table-row {
+  border-bottom: 1px solid #eee;
+}

@@ -1,6 +1,7 @@
 import "./App.css";
 import Todo from "./components/Todo";
-import { Routes, Route } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import { Routes, Route, NavLink } from "react-router-dom";
 import InputFocus from "./components/InputFocus";
 // import Counter from "./components/Counter";
 import Timer from "./components/Timer";
@@ -9,7 +10,9 @@ import Parent from "./components/Parent";
 import Users from "./components/Users";
 import Accordion from "./components/Accordion";
 import Guardian from "./components/Guardian";
-import Dashboard from "./components/Dashboard";
+const Dashboard = lazy(() => import("./components/Dashboard"));
+const Reports = lazy(() => import("./components/Reports"));
+const preloadReports = () => import("./components/Reports");
 import ProtectedDashboard from "./pages/ProtectedDashboard";
 import ProtectedSalaryReport from "./pages/ProtectedSalaryReport";
 import useToast from "./hooks/useToast";
@@ -21,6 +24,10 @@ import AddEmployee from "./components/AddEmployee";
 import Employees from "./components/Employees";
 import { EmployeeForm } from "./components/EmployeeForm";
 import EditEmployee from "./components/EditEmployee";
+import FetchDummies from "./components/FetchDummies";
+import PageSkeleton from "./components/PageSkeleton";
+import ErrorBoundary from "./components/ErrorBoundary";
+import SkeletonBox from "./skeletons/SkeletonBox";
 
 function App() {
   // const { addToast } = useToast();
@@ -102,6 +109,20 @@ function App() {
         </Routes> */}
         {/* <Employees />
         <EmployeeForm /> */}
+        {/* <FetchDummies /> */}
+        {/* <ErrorBoundary>
+          <NavLink to="/">Dashboard</NavLink>
+          <NavLink to="/reports" onMouseEnter={preloadReports}>
+            Reports
+          </NavLink>
+          <Suspense fallback={<PageSkeleton />}>
+            <Routes>
+              <Route path="/" element={<Dashboard />}></Route>
+              <Route path="/reports" element={<Reports />}></Route>
+            </Routes>
+          </Suspense>
+        </ErrorBoundary> */}
+        {/* <SkeletonBox /> */}
       </>
     </>
   );

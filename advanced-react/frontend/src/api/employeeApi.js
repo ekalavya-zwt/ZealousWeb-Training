@@ -8,6 +8,16 @@ export const fetchEmployees = async () => {
   return res.json();
 };
 
+export const fetchDummyEmployees = async () => {
+  const res = await fetch("/api/dummy_employees");
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch dummy employees");
+  }
+
+  return res.json();
+};
+
 export const createEmployee = async (employeeData) => {
   const res = await fetch("/api/employees", {
     method: "POST",
