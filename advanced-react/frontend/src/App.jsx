@@ -1,7 +1,7 @@
 import "./App.css";
 import Todo from "./components/Todo";
 import { lazy, Suspense } from "react";
-import { Routes, Route, NavLink } from "react-router-dom";
+import { Routes, Route, NavLink, Form } from "react-router-dom";
 import InputFocus from "./components/InputFocus";
 // import Counter from "./components/Counter";
 import Timer from "./components/Timer";
@@ -11,7 +11,7 @@ import Users from "./components/Users";
 import Accordion from "./components/Accordion";
 import Guardian from "./components/Guardian";
 const Dashboard = lazy(() => import("./components/Dashboard"));
-const Reports = lazy(() => import("./components/Reports"));
+// const Reports = lazy(() => import("./components/Reports"));
 const preloadReports = () => import("./components/Reports");
 import ProtectedDashboard from "./pages/ProtectedDashboard";
 import ProtectedSalaryReport from "./pages/ProtectedSalaryReport";
@@ -19,15 +19,33 @@ import useToast from "./hooks/useToast";
 import Counter from "./Zustand/components/Counter";
 import SignIn from "./components/SignIn";
 import ProtectedRoute from "./routes/ProtectedRoute";
-import EmployeeList from "./components/EmployeeList";
+// import EmployeeList from "./components/EmployeeList";
 import AddEmployee from "./components/AddEmployee";
-import Employees from "./components/Employees";
+// import Employees from "./components/Employees";
 import { EmployeeForm } from "./components/EmployeeForm";
 import EditEmployee from "./components/EditEmployee";
 import FetchDummies from "./components/FetchDummies";
 import PageSkeleton from "./components/PageSkeleton";
 import ErrorBoundary from "./components/ErrorBoundary";
 import SkeletonBox from "./skeletons/SkeletonBox";
+import Analytics from "./components/Analytics";
+import Settings from "./components/Settings";
+import Layout from "./components/Layout";
+import Homepage from "./components/Homepage";
+import About from "./components/About";
+import Projects from "./components/Projects";
+import Contact from "./components/Contact";
+import Products from "./components/Products";
+import Profile from "./components/Profile";
+import Login from "./components/Login";
+import Unauthorized from "./components/Unauthorized";
+import RoleRoute from "./routes/RoleRoute";
+import DashboardLayout from "../layouts/DashboardLayout";
+import EmployeeList from "./pages/EmployeeList";
+import EmployeeDetail from "./pages/EmployeeDetail";
+import DepartmentList from "./pages/DepartmentList";
+import Reports from "./pages/Reports";
+import Employees from "./pages/Employees";
 
 function App() {
   // const { addToast } = useToast();
@@ -90,8 +108,9 @@ function App() {
             Info Toast
           </button>
         </div> */}
-        {/* <Counter /> */}
-        {/* <Routes>
+      </>
+      {/* <Counter /> */}
+      {/* <Routes>
           <Route path="/login" element={<SignIn />} />
           <Route
             path="/dashboard"
@@ -102,15 +121,15 @@ function App() {
             }
           />
         </Routes> */}
-        {/* <Routes>
+      {/* <Routes>
           <Route path="/" element={<EmployeeList />}></Route>
           <Route path="/add" element={<AddEmployee />}></Route>
           <Route path="/edit/:id" element={<EditEmployee />}></Route>
         </Routes> */}
-        {/* <Employees />
+      {/* <Employees />
         <EmployeeForm /> */}
-        {/* <FetchDummies /> */}
-        {/* <ErrorBoundary>
+      {/* <FetchDummies /> */}
+      {/* <ErrorBoundary>
           <NavLink to="/">Dashboard</NavLink>
           <NavLink to="/reports" onMouseEnter={preloadReports}>
             Reports
@@ -122,8 +141,64 @@ function App() {
             </Routes>
           </Suspense>
         </ErrorBoundary> */}
-        {/* <SkeletonBox /> */}
-      </>
+      {/* <SkeletonBox /> */}
+      {/* <Routes>
+        <Route path="/" element={<Dashboard />}>
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/settings" element={<Settings />} />
+        </Route>
+      </Routes> */}
+      {/* <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/contact" element={<Contact />} />
+        </Route>
+      </Routes> */}
+      {/* <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/products" element={<Products />} />
+      </Routes> */}
+      {/* <Routes>
+        <Route path="/" element={<Dashboard />}>
+          <Route path="/profile" element={<Profile />} />
+        </Route>
+      </Routes> */}
+      {/* <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+      </Routes> */}
+      {/* <Routes>
+        <Route path="/unauthorized" element={<Unauthorized />} />
+        <Route
+          path="/"
+          element={
+            <RoleRoute role="user">
+              <Dashboard />
+            </RoleRoute>
+          }
+        />
+      </Routes> */}
+      {/* <Routes>
+        <Route path="/" element={<DashboardLayout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="/employees">
+            <Route index element={<EmployeeList />} />
+            <Route path="/employees/:id" element={<EmployeeDetail />} />
+          </Route>
+          <Route path="/departments" element={<DepartmentList />} />
+          <Route path="/reports" element={<Reports />} />
+        </Route>
+      </Routes> */}
+      {/* <Employees /> */}
     </>
   );
 }

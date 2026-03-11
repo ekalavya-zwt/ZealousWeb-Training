@@ -1,7 +1,8 @@
 a {
-  font-size: 1.5rem;
-  margin: 20px;
+  /* font-size: 1.5rem; */
+  /* margin: 20px; */
   text-decoration: none;
+  color: #333;
 }
 
 a:hover {
