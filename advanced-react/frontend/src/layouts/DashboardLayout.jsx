@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
-import Breadcrumbs from "../src/components/Breadcrumbs";
-import "../src/styles/DashboardLayout.css";
+import Breadcrumbs from "../components/Breadcrumbs";
+import "../styles/DashboardLayout.css";
 
 function DashboardLayout() {
   const currentUser = {

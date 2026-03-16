@@ -40,12 +40,13 @@ import Profile from "./components/Profile";
 import Login from "./components/Login";
 import Unauthorized from "./components/Unauthorized";
 import RoleRoute from "./routes/RoleRoute";
-import DashboardLayout from "../layouts/DashboardLayout";
+import DashboardLayout from "./layouts/DashboardLayout";
 import EmployeeList from "./pages/EmployeeList";
 import EmployeeDetail from "./pages/EmployeeDetail";
 import DepartmentList from "./pages/DepartmentList";
 import Reports from "./pages/Reports";
 import Employees from "./pages/Employees";
+import UserForm from "./components/UserForm";
 
 function App() {
   // const { addToast } = useToast();
@@ -199,6 +200,7 @@ function App() {
         </Route>
       </Routes> */}
       {/* <Employees /> */}
+      <UserForm />
     </>
   );
 }
