@@ -1,0 +1,23 @@
+{
+  "name": "docker-tutorial",
+  "version": "1.0.0",
+  "description": "Docker tutorial",
+  "homepage": "https://github.com/ekalavya-zwt/ZealousWeb-Training#readme",
+  "bugs": {
+    "url": "https://github.com/ekalavya-zwt/ZealousWeb-Training/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ekalavya-zwt/ZealousWeb-Training.git"
+  },
+  "license": "ISC",
+  "author": "Ekalavya",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

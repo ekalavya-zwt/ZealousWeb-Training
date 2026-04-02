@@ -231,20 +231,20 @@
 // console.log(getFood(fish));
 // console.log(getFood(bird));
 
-interface Circle {
-  kind: "circle";
-  radius: number;
-}
-interface Square {
-  kind: "square";
-  side: number;
-}
-interface Rectangle {
-  kind: "rectangle";
-  length: number;
-  width: number;
-}
-type Shape = Circle | Square | Rectangle;
+// interface Circle {
+//   kind: "circle";
+//   radius: number;
+// }
+// interface Square {
+//   kind: "square";
+//   side: number;
+// }
+// interface Rectangle {
+//   kind: "rectangle";
+//   length: number;
+//   width: number;
+// }
+// type Shape = Circle | Square | Rectangle;
 // function getArea(shape: Shape) {
 //   if (shape.kind === "circle") {
 //     return (Math.PI * shape.radius ** 2).toFixed(2);
@@ -257,19 +257,440 @@ type Shape = Circle | Square | Rectangle;
 // console.log(getArea({ kind: "circle", radius: 5 }));
 // console.log(getArea({ kind: "square", side: 5 }));
 // console.log(getArea({ kind: "rectangle", length: 5, width: 7 }));
-function getArea(shape: Shape) {
-  switch (shape.kind) {
-    case "circle":
-      return (Math.PI * shape.radius ** 2).toFixed(2);
-    case "square":
-      return shape.side ** 2;
-    case "rectangle":
-      return shape.length * shape.width;
-    default:
-      const _defaultForShape: never = shape;
-      return _defaultForShape;
-  }
-}
-console.log(getArea({ kind: "circle", radius: 5 }));
-console.log(getArea({ kind: "square", side: 5 }));
-console.log(getArea({ kind: "rectangle", length: 5, width: 7 }));
+// function getArea(shape: Shape) {
+//   switch (shape.kind) {
+//     case "circle":
+//       return (Math.PI * shape.radius ** 2).toFixed(2);
+//     case "square":
+//       return shape.side ** 2;
+//     case "rectangle":
+//       return shape.length * shape.width;
+//     default:
+//       const _defaultForShape: never = shape;
+//       return _defaultForShape;
+//   }
+// }
+// console.log(getArea({ kind: "circle", radius: 5 }));
+// console.log(getArea({ kind: "square", side: 5 }));
+// console.log(getArea({ kind: "rectangle", length: 5, width: 7 }));
+
+// TypeScript Practice Questions
+
+// function sum(a: unknown, b: unknown): number {
+//   if (typeof a === "number" && typeof b === "number") {
+//     return a + b;
+//   }
+//   throw new Error("Invalid input");
+// }
+// console.log(sum(5, 8));
+
+// type User = {
+//   id: number;
+//   name: string;
+//   email?: string;
+//   isActive: boolean;
+// };
+
+// function getUserInfo(user: User) {
+//   const email = user.email ?? "No email provided";
+
+//   console.log(`
+//     ID: ${user.id}
+//     Name: ${user.name}
+//     Email: ${email}
+//     isActive: ${user.isActive}
+//     `);
+// }
+
+// getUserInfo({
+//   id: 123,
+//   name: "Ekalavya",
+//   email: "ek123@gmail.com",
+//   isActive: true,
+// });
+
+// function formatInput(input: string | number) {
+//   if (typeof input === "number") {
+//     return input ** 2;
+//   } else if (typeof input === "string") {
+//     return input.toUpperCase();
+//   } else {
+//     throw new Error("Invalid input");
+//   }
+// }
+
+// console.log(formatInput(4));
+
+// function getFirstElement<T>(arr: T[]): T | undefined {
+//   return arr[2];
+// }
+// console.log(getFirstElement(["apple", "banana", "mango", "strawberry"]));
+
+// type ApiResponse<T> = {
+//   success: boolean;
+//   data: T;
+//   error?: string;
+// };
+
+// function getUser<T>(user: ApiResponse<T>): T | string {
+//   return user.success ? user.data : (user.error ?? "Failed to fetch data");
+// }
+
+// console.log(
+//   getUser({
+//     success: false,
+//     data: ["apple", "banana", "mango", "strawberry"],
+//   }),
+// );
+
+// class AppError extends Error {
+//   statusCode: number;
+//   errorType: "Operational" | "Programming";
+
+//   constructor(
+//     message: string,
+//     statusCode: number,
+//     errorType: "Operational" | "Programming",
+//   ) {
+//     super(message);
+
+//     this.statusCode = statusCode;
+//     this.errorType = errorType;
+
+//     Object.setPrototypeOf(this, AppError.prototype);
+//   }
+// }
+
+// function getUser(id: number) {
+//   if (id <= 0) {
+//     throw new AppError("Invalid user ID", 400, "Programming");
+//   }
+//   return { id, name: "Ekalavya" };
+// }
+
+// try {
+//   const user = getUser(0);
+//   console.log(user);
+// } catch (error) {
+//   if (error instanceof AppError) {
+//     console.log("Error:", error.message);
+//     console.log("Status:", error.statusCode);
+//     console.log("Type:", error.errorType);
+//   } else {
+//     console.log("Unknown error");
+//   }
+// }
+
+// type User = {
+//   name: string;
+// };
+
+// function getUser(user: User) {
+//   return "Hello " + user.name;
+// }
+
+// console.log(getUser({ name: "Ekalavya" }));
+
+// type Company = { company: string; employees: string[] };
+
+// function getEmployees(emp: Company) {
+//   return `
+//   Company: ${emp.company}
+//   Employees: ${emp.employees}
+//   `;
+// }
+
+// console.log(
+//   getEmployees({
+//     company: "ZealousWeb",
+//     employees: ["Ekalavya", "Utkarsh", "Shubham", "Divya"],
+//   }),
+// );
+
+// function identity<T>(value: T): T {
+//   return value;
+// }
+
+// console.log(identity("Hello"));
+// console.log(identity(10));
+// console.log(identity(["apple", "banana", "mango", "strawberry"]));
+// console.log(identity({ brand: "Ford", model: "Mustang", color: "Black" }));
+
+// function getFirstElement<T>(value: T[]): T[] {
+//   return value;
+// }
+
+// console.log(getFirstElement(["apple", "banana", "mango", "strawberry"]));
+// console.log(getFirstElement([1, 2, 3, 4, 5]));
+// console.log(
+//   getFirstElement([
+//     { id: 1, name: "Ekalavya" },
+//     { id: 2, name: "Aman" },
+//   ]),
+// );
+
+// type Response = {
+//   status: "success" | "error";
+//   data: {
+//     id: number;
+//     name: string;
+//   };
+// };
+
+// function getResponse(res: Response) {
+//   if (res.status === "success") {
+//     return res.data;
+//   } else if (res.status === "error") {
+//     return "Failed to fetch data";
+//   } else {
+//     return "Unknown error";
+//   }
+// }
+
+// console.log(
+//   getResponse({ status: "success", data: { id: 101, name: "Ekalavya" } }),
+// );
+// console.log(
+//   getResponse({ status: "error", data: { id: 101, name: "Ekalavya" } }),
+// );
+// console.log(
+//   getResponse({ status: "random", data: { id: 101, name: "Ekalavya" } }),
+// );
+
+// enum Role {
+//   Admin,
+//   User,
+//   Guest,
+// }
+
+// function checkAccess(myRole: Role) {
+//   if (myRole === Role.Admin) {
+//     console.log("Admin priviledges will be provided");
+//   } else if (myRole === Role.User) {
+//     console.log("User priviledges will be provided");
+//   } else {
+//     console.log("No priviledges will be provided");
+//   }
+// }
+
+// checkAccess(Role.Admin);
+
+// type Todo = {
+//   id: number;
+//   title: string;
+//   isCompleted: boolean;
+// };
+
+// class TodoManager {
+//   private todos: Todo[] = [];
+//   private id: number = 1;
+
+//   addTodo(title: string): void {
+//     const newTodo: Todo = {
+//       id: this.id++,
+//       title,
+//       isCompleted: false,
+//     };
+//     this.todos.push(newTodo);
+//   }
+
+//   deleteTodo(id: number): void {
+//     this.todos = this.todos.filter((todo) => todo.id !== id);
+//   }
+
+//   editTodo(id: number, newTitle: string): void {
+//     const todo = this.todos.find((todo) => todo.id === id);
+//     if (todo) {
+//       todo.title = newTitle;
+//     } else {
+//       console.log("Todo does not exist");
+//     }
+//   }
+
+//   toggleTodo(id: number): void {
+//     const todo = this.todos.find((todo) => todo.id === id);
+//     if (todo) {
+//       todo.isCompleted = !todo.isCompleted;
+//     } else {
+//       console.log("Todo does not exist");
+//     }
+//   }
+
+//   displayTodos(): void {
+//     this.todos.forEach((todo) => {
+//       console.log(
+//         `${todo.id}. ${todo.title} [${todo.isCompleted ? "✔" : "❌"}]`,
+//       );
+//     });
+//   }
+// }
+
+// const manager = new TodoManager();
+
+// manager.addTodo("Walk the dog");
+// manager.addTodo("Make breakfast");
+// manager.addTodo("Clean room");
+
+// manager.displayTodos();
+
+// manager.toggleTodo(1);
+// manager.deleteTodo(2);
+// manager.editTodo(3, "Clean room and make bed");
+
+// console.log("\nAfter updates:");
+// manager.displayTodos();
+
+// type Product = {
+//   id: number;
+//   name: string;
+//   stock: number;
+// };
+
+// class ProductManager {
+//   private products: Product[] = [];
+//   private id: number = 1;
+
+//   addProduct(name: string, stock: number): void {
+//     const product: Product = {
+//       id: this.id++,
+//       name,
+//       stock,
+//     };
+//     this.products.push(product);
+//   }
+
+//   updateStock(id: number, stock: number): void {
+//     const product = this.products.find((item) => item.id === id);
+//     if (product) {
+//       product.stock = stock;
+//     } else {
+//       console.log("Product does not exist");
+//     }
+//   }
+
+//   displayInventory(): void {
+//     this.products.forEach((product) => {
+//       console.log(`${product.id}. ${product.name} - ${product.stock} pcs`);
+//     });
+//   }
+// }
+
+// const manager = new ProductManager();
+
+// manager.addProduct("Dell Laptops", 10);
+// manager.addProduct("Dell Monitors", 25);
+// manager.addProduct("Mechanical Keyboards", 20);
+// manager.addProduct("Razor gaming mouse", 15);
+
+// manager.displayInventory();
+
+// manager.updateStock(3, 15);
+
+// console.log("\nAfter update:");
+// manager.displayInventory();
+
+// type User = {
+//   id: number;
+//   name: string;
+//   email: string;
+// };
+
+// type FetchResultType<T> = {
+//   data: T | null;
+//   error: string | null;
+// };
+
+// async function fetchData<T>(url: string): Promise<FetchResultType<T>> {
+//   try {
+//     const res: Response = await fetch(url);
+
+//     if (!res.ok) {
+//       return {
+//         data: null,
+//         error: "Failed to fetch API",
+//       };
+//     }
+
+//     const data: T = await res.json();
+
+//     return {
+//       data,
+//       error: null,
+//     };
+//   } catch (error) {
+//     return {
+//       data: null,
+//       error: "Something went wrong",
+//     };
+//   }
+// }
+
+// async function getUsers(url: string) {
+//   const result = await fetchData<User[]>(url);
+
+//   if (result.error) {
+//     console.error(result.error);
+//     return;
+//   }
+
+//   if (result.data) {
+//     result.data.forEach((user) => {
+//       console.log(`
+//       Id: ${user.id}
+//       Name: ${user.name}
+//       Email: ${user.email}
+//       `);
+//     });
+//   }
+// }
+
+// async function getUser(url: string) {
+//   const result = await fetchData<User>(url);
+
+//   if (result.error) {
+//     console.error(result.error);
+//     return;
+//   }
+
+//   if (result.data) {
+//     console.log(`
+//       Id: ${result.data.id}
+//       Name: ${result.data.name}
+//       Email: ${result.data.email}
+//       `);
+//   }
+// }
+
+// getUsers("https://jsonplaceholder.typicode.com/users");
+// getUser("https://jsonplaceholder.typicode.com/users/10");
+
+// function pair<T, U>(a: T, b: U): [T, U] {
+//   return [a, b];
+// }
+
+// console.log(pair<string, number>("Ekalavya", 21));
+
+// function wrapInArray<T>(value: T): T[] {
+//   return [value];
+// }
+
+// console.log(wrapInArray({ name: "Ekalavya", age: 21 }));
+
+// function reverseArray<T>(array: T[]): T[] {
+//   const result: T[] = [];
+//   for (let i = array.length - 1; i >= 0; i--) {
+//     const item = array[i];
+//     if (item !== undefined) {
+//       result.push(item);
+//     }
+//   }
+//   return result;
+// }
+
+// function reverseArray<T>(array: T[]): T[] {
+//   return [...array].reverse();
+// }
+
+// console.log(reverseArray([1, 2, 3, 4, 5]));
+// console.log(reverseArray(["a", "b", "c"]));
+// console.log(reverseArray([true, false, true]));
